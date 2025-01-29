@@ -2,7 +2,10 @@
     "require": {
         "revolt/event-loop": "^1.0",
         "guzzlehttp/psr7": "^2.7",
-        "nyholm/psr7": "^1.8"
+        "nyholm/psr7": "^1.8",
+        "nyholm/psr7-server": "^1.1",
+        "psr/container": "^2.0",
+        "monolog/monolog": "^3.0"
     },
     "autoload": {
         "psr-4": {
