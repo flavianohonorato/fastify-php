@@ -10,6 +10,10 @@ A lightweight PHP framework inspired by Fastify, implementing PSR-7, PSR-11, and
 - **Comprehensive Logging System** using Monolog
 - **Clean Architecture** following SOLID principles
 - **Type-Safe** with strict typing enabled
+- **Testing Suite** with PHPUnit integration
+  - Feature and Unit test base classes
+  - HTTP testing utilities
+  - Container-aware test cases
 
 ## Requirements
 
@@ -34,6 +38,18 @@ php -S localhost:8000 -t public
 curl http://localhost:8000
 ```
 
+## Testing
+
+Run the test suite:
+```bash
+composer test
+```
+
+Generate test coverage report:
+```bash
+composer test:coverage
+```
+
 ## Project Structure
 
 ```
@@ -48,6 +64,10 @@ curl http://localhost:8000
 │   │   └── ErrorHandler.php # Global error handler
 │   └── Http/
 │       └── Controllers/     # Application controllers
+├── tests/                   # Test suite
+│   ├── Unit/                # Unit tests
+│   ├── Feature/             # Feature tests
+│   └── TestCase.php         # Base test case
 ├── logs/                    # Application logs
 ├── composer.json            # Dependencies and autoloading
 └── README.md                # This file
@@ -113,13 +133,6 @@ class HomeController implements ControllerInterface
 
 ## Upcoming Features
 
-### Testing & Quality
-- [ ] PHPUnit integration with test examples
-- [ ] Feature and Unit test base classes
-- [ ] Mock and stub helpers for testing
-- [ ] Code coverage reports
-- [ ] Static analysis with PHPStan
-
 ### Core Features
 - [ ] Route parameters and pattern matching
 - [ ] Middleware support (before/after handlers)
@@ -127,6 +140,13 @@ class HomeController implements ControllerInterface
 - [ ] Database integration with query builder
 - [ ] Configuration management
 - [ ] CLI commands support
+
+### Testing & Quality ✓
+- [x] PHPUnit integration with test examples
+- [x] Feature and Unit test base classes
+- [x] HTTP testing utilities
+- [ ] Code coverage reports
+- [ ] Static analysis with PHPStan
 
 ### Performance & Development
 - [ ] Development server with auto-reload
