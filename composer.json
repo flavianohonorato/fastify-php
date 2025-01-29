@@ -1,0 +1,7 @@
+{
+    "require": {
+        "revolt/event-loop": "^1.0",
+        "guzzlehttp/psr7": "^2.7",
+        "nyholm/psr7": "^1.8"
+    }
+}
