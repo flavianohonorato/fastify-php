@@ -1,4 +1,8 @@
 /vendor
 .idea
 .env
+.env.testing
 /logs/app.log
+.phpunit.cache/
+coverage/
+composer.lock
