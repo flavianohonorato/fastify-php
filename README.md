@@ -81,8 +81,8 @@ composer test:coverage
 - Manages service lifecycle
 
 ### Router
-- Supports GET and POST methods
-- Route parameters (coming soon)
+- Supports GET,POST, PUT and DELETE methods
+- Route parameters and pattern matching
 - Controller-based handling
 
 ### Error Handler
@@ -107,7 +107,7 @@ use Psr\Http\Message\ServerRequestInterface;
 
 interface ControllerInterface
 {
-    public function handle(ServerRequestInterface $request): ResponseInterface;
+    public function handle(ServerRequestInterface $request, ...$params): ResponseInterface;
 }
 ```
 
@@ -120,21 +120,51 @@ use Nyholm\Psr7\Response;
 
 class HomeController implements ControllerInterface
 {
-    public function handle(ServerRequestInterface $request): ResponseInterface
+    public function handle(ServerRequestInterface $request, ...$params): ResponseInterface
     {
         return new Response(
             200,
             ['Content-Type' => 'application/json'],
-            json_encode(['message' => 'Hello, Fastify PHP!'])
+            json_encode(['message' => 'Hello, Fastify PHP!', 'params' => $params])
         );
     }
 }
 ```
 
+## Routing Parameters and Pattern Matching
+Tthe router supports route parameters and pattern matching for GET, POST, PUT, and DELETE methods.
+
+### Example usage
+
+```php
+use App\Core\Container;
+use App\Core\Router;
+use App\Http\Controllers\HomeController;
+use Nyholm\Psr7\ServerRequest;
+
+$container = new Container();
+$container->set(HomeController::class, new HomeController());
+$router = new Router($container);
+
+// Define routes with parameters
+$router->get('/user/{id}', HomeController::class);
+$router->post('/user/{id}', HomeController::class);
+$router->put('/user/{id}', HomeController::class);
+$router->delete('/user/{id}', HomeController::class);
+
+// Dispatch a request
+$request = new ServerRequest('GET', '/user/123');
+$response = $router->dispatch($request);
+
+echo $response->getBody(); // {"message":"Hello, Fastify PHP!","params":["123"]}
+```
+
+```php
+
 ## Upcoming Features
 
 ### Core Features
-- [ ] Route parameters and pattern matching
+- [x] Route parameters and pattern matching
 - [ ] Middleware support (before/after handlers)
 - [ ] Request validation with custom rules
 - [ ] Database integration with query builder

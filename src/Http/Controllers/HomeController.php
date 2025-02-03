@@ -10,12 +10,12 @@ use Psr\Http\Message\ServerRequestInterface;
 
 class HomeController implements ControllerInterface
 {
-    public function handle(ServerRequestInterface $request): ResponseInterface
+    public function handle(ServerRequestInterface $request, ...$params): ResponseInterface
     {
         return new Response(
             200,
             ['Content-Type' => 'application/json'],
-            json_encode(['message' => 'Hello, Fastify PHP!'])
+            json_encode(['message' => 'Hello, Fastify PHP!', 'params' => $params])
         );
     }
 }
